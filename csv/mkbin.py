@@ -15,7 +15,7 @@ import struct
 
 packIntFunc = lambda size, data, fmt: struct.pack(fmt, int(data))
 packStrFunc = lambda size, data, fmt: struct.pack(size + fmt, bytes(data, encoding='utf-8'))
-packBoolFunc = lambda size, data, fmt: b'1' if data.lower()=="true" else b'0'
+packBoolFunc = lambda size, data, fmt: b'1' if data.lower()=="true" or data == "1" else b'0'
 
 func_tbl = {
     "TYP_STRING"  : [packStrFunc, "s"],
