@@ -12,6 +12,8 @@ TYP_BOOL	1	TRUE
 """
 import csv
 import struct
+import sys
+from os import path
 
 packIntFunc = lambda size, data, fmt: struct.pack(fmt, int(data))
 packStrFunc = lambda size, data, fmt: struct.pack(size + fmt, bytes(data, encoding='utf-8'))
@@ -28,15 +30,27 @@ func_tbl = {
     "TYP_BOOL"    : [packBoolFunc, ""],
 }
 
-rf = open("data.txt","r")
-wf = open("data.bin","wb")
-reader = csv.reader(rf, delimiter='\t')
-for row in reader:
-    if (not row[0]) or (not row[1]) or (not row[2]):
-        continue
-    if func_tbl[row[0]]:
-        data = func_tbl[row[0]][0](row[1],row[2],func_tbl[row[0]][1])
-        print(data)
-        wf.write(data)
-rf.close()
-wf.close()
+def mkbin(in_dat, out_bin):
+    rf = open(in_dat,"r")
+    wf = open(out_bin,"wb")
+    reader = csv.reader(rf, delimiter='\t')
+    for row in reader:
+        if (not row[0]) or (not row[1]) or (not row[2]):
+            continue
+        if func_tbl[row[0]]:
+            data = func_tbl[row[0]][0](row[1],row[2],func_tbl[row[0]][1])
+            print(data)
+            wf.write(data)
+    rf.close()
+    wf.close()
+
+if __name__ == '__main__':
+    args = sys.argv
+    if len(args) < 2:
+        in_dat = "data.txt"
+        out_bin = "data.bin"
+    else:
+        in_dat = args[1]
+        out_bin = path.splitext(in_dat)[0] + '.bin'
+    mkbin(in_dat, out_bin)
+
