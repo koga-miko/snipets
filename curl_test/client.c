@@ -124,7 +124,7 @@ int main(void)
 	}
 
 	// gzip圧縮ファイル化★
-	gzf = gzopen(GZIP_FILE_NAME,"wb");
+	gzf = gzopen(GZIP_FILE_NAME,"w");
 	gzputs(gzf, postdata);
 	gzclose(gzf);
 	
