@@ -1,0 +1,2 @@
+#/usr/bin/bash
+sed -i.bak s/BASE_OUT/INT_VR_OUT/g test.txt
