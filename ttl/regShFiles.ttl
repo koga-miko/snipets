@@ -1,0 +1,64 @@
+; TeraTerm用マクロ
+;
+; File: regShFiles.ttl
+; Description: 当該スクリプトと同階層にあるシェルスクリプトをコンソール入力操作で現在のディレクトリにコピーする
+; Environment: xxx
+; Update: 2020/12/14
+; Author: Yoshiharu Hamaguchi
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; 該当ファイル（.sh）
+extpat='*.sh'
+
+; 現在のマクロ実行ディレクトリの取得
+getdir ttlpath
+
+; ファイルシステムに書き込めるようにする
+;sendln 'mount -o remount -rw /'
+
+; 該当ファイル（まずは先頭）を探す
+findfirst dh extpat filename
+
+; ファイルが存在する間は繰り返す
+while result
+	; 同名ファイルがあれば事前に削除する
+	sprintf2 cmdstr 'rm -f %s' filename
+	sendln cmdstr
+
+	; viエディタでファイル作成
+	sprintf2 cmdstr 'vi %s' filename
+	sendln cmdstr
+	pause 1; 1秒待ち
+
+	; vi:インサートモード開始
+	send 'i'
+
+	; ファイルの内容をまるっと送出する
+	makepath fullpath ttlpath filename
+	sendfile fullpath 0
+
+	; vi:ESCキーでインサートモード終了
+	sendkcode 1 1
+	pause 1; 1秒待ち
+	
+	; vi:保存終了
+	sendln ':wq'
+	pause 1; 1秒待ち
+
+	; フォルダ内容の次のファイルを探す
+	findnext dh filename
+
+endwhile
+
+; 該当ファイルの検索を終了する
+findclose dh
+
+; 該当ファイルに実行権限付与
+sprintf2 cmdstr 'chmod 755 %s' extpat
+sendln cmdstr
+
+; 書き込み同期する
+sendln 'sync'
+
+; ファイルシステムの書き込みを終了する
+;sendln 'mount -o remount -rw /'
