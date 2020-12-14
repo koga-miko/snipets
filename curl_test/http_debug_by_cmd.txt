@@ -1,0 +1,49 @@
+== Info:   Trying 127.0.0.1:5000...
+== Info: Connected to 127.0.0.1 (127.0.0.1) port 5000 (#0)
+=> Send header, 191 bytes (0xbf)
+0000: 50 4f 53 54 20 2f 70 6f 73 74 20 48 54 54 50 2f POST /post HTTP/
+0010: 31 2e 31 0d 0a 48 6f 73 74 3a 20 31 32 37 2e 30 1.1..Host: 127.0
+0020: 2e 30 2e 31 3a 35 30 30 30 0d 0a 55 73 65 72 2d .0.1:5000..User-
+0030: 41 67 65 6e 74 3a 20 63 75 72 6c 2f 37 2e 37 32 Agent: curl/7.72
+0040: 2e 30 0d 0a 41 63 63 65 70 74 3a 20 2a 2f 2a 0d .0..Accept: */*.
+0050: 0a 41 63 63 65 70 74 2d 45 6e 63 6f 64 69 6e 67 .Accept-Encoding
+0060: 3a 20 64 65 66 6c 61 74 65 2c 20 67 7a 69 70 0d : deflate, gzip.
+0070: 0a 43 6f 6e 74 65 6e 74 2d 45 6e 63 6f 64 69 6e .Content-Encodin
+0080: 67 3a 20 67 7a 69 70 0d 0a 43 6f 6e 74 65 6e 74 g: gzip..Content
+0090: 2d 54 79 70 65 3a 20 61 70 70 6c 69 63 61 74 69 -Type: applicati
+00a0: 6f 6e 2f 6a 73 6f 6e 0d 0a 43 6f 6e 74 65 6e 74 on/json..Content
+00b0: 2d 4c 65 6e 67 74 68 3a 20 33 36 0d 0a 0d 0a    -Length: 36....
+=> Send data, 36 bytes (0x24)
+0000: 1f 8b 08 00 00 00 00 00 00 03 ab 56 ca 4b cc 4d ...........V.K.M
+0010: 55 b2 52 0a 49 2d 2e 51 aa e5 02 00 28 ac fd 95 U.R.I-.Q....(...
+0020: 10 00 00 00                                     ....
+== Info: upload completely sent off: 36 out of 36 bytes
+== Info: Mark bundle as not supporting multiuse
+== Info: HTTP 1.0, assume close after body
+<= Recv header, 17 bytes (0x11)
+0000: 48 54 54 50 2f 31 2e 30 20 32 30 30 20 4f 4b 0d HTTP/1.0 200 OK.
+0010: 0a                                              .
+<= Recv header, 32 bytes (0x20)
+0000: 43 6f 6e 74 65 6e 74 2d 54 79 70 65 3a 20 61 70 Content-Type: ap
+0010: 70 6c 69 63 61 74 69 6f 6e 2f 6a 73 6f 6e 0d 0a plication/json..
+<= Recv header, 20 bytes (0x14)
+0000: 43 6f 6e 74 65 6e 74 2d 4c 65 6e 67 74 68 3a 20 Content-Length: 
+0010: 33 36 0d 0a                                     36..
+<= Recv header, 24 bytes (0x18)
+0000: 43 6f 6e 74 65 6e 74 2d 45 6e 63 6f 64 69 6e 67 Content-Encoding
+0010: 3a 20 67 7a 69 70 0d 0a                         : gzip..
+<= Recv header, 37 bytes (0x25)
+0000: 53 65 72 76 65 72 3a 20 57 65 72 6b 7a 65 75 67 Server: Werkzeug
+0010: 2f 31 2e 30 2e 31 20 50 79 74 68 6f 6e 2f 33 2e /1.0.1 Python/3.
+0020: 38 2e 32 0d 0a                                  8.2..
+<= Recv header, 37 bytes (0x25)
+0000: 44 61 74 65 3a 20 53 75 6e 2c 20 30 34 20 4f 63 Date: Sun, 04 Oc
+0010: 74 20 32 30 32 30 20 30 37 3a 32 38 3a 31 34 20 t 2020 07:28:14 
+0020: 47 4d 54 0d 0a                                  GMT..
+<= Recv header, 2 bytes (0x2)
+0000: 0d 0a                                           ..
+<= Recv data, 36 bytes (0x24)
+0000: 1f 8b 08 00 00 00 00 00 00 03 ab 56 ca 4b cc 4d ...........V.K.M
+0010: 55 b2 52 0a 49 2d 2e 51 aa e5 02 00 28 ac fd 95 U.R.I-.Q....(...
+0020: 10 00 00 00                                     ....
+== Info: Closing connection 0
