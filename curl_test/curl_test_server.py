@@ -9,7 +9,7 @@ app = Flask(__name__)
 
 @app.route('/post', methods=['POST'])
 def post_json():
-  resp = make_response(request.data)
+  resp = make_responsemake_response(request.data)
   resp.headers['Content-Encoding'] = request.headers['Content-Encoding']
   resp.headers['Content-Type'] = request.headers['Content-Type']
   return resp
