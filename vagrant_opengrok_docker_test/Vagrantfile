@@ -1,0 +1,33 @@
+Vagrant.configure("2") do |config|
+  config.vm.box = "ubuntu/focal64"
+  config.vm.hostname = "myserver"
+  config.vm.network "forwarded_port", guest: 8080, host: 8888
+  config.vm.synced_folder "./share", "/home/vagrant/share", mount_options: ['dmode=755','fmode=644']
+  config.vm.provider "virtualbox" do |v|
+    v.name = "myserver"
+    v.memory = 2048
+    v.cpus = 2
+  end
+  config.vm.provision "shell", inline: <<-SHELL
+    # dockerを使うために必要な前提ソフトウェアのインストール
+    apt update -y
+    apt install -y apt-transport-https ca-certificates curl gnupg-agent software-properties-common
+
+    # GPG公開鍵のインストール
+    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+
+    # aptリポジトリの設定(※stable, edgh, test すべてのバージョンをインストール。edgeがないと以後のdocker-ce-cliが見つからないといわれる)
+    add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable edge test"
+
+    # docker-ceのインストール
+    apt update -y
+    apt install -y docker-ce docker-ce-cli containerd.io
+    
+    # vagrantユーザーでdockerを利用できるようにする
+    gpasswd -a vagrant docker
+
+    # openGrokをインストール
+    docker run -d -v /home/vagrant/share:/opengrok/src -p 8080:8080 --name opengrok-cntnr opengrok/docker:latest
+  SHELL
+  config.vm.provision "shell", run: "always", inline: "docker start opengrok-cntnr"
+end
